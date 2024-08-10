@@ -7,7 +7,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+        }
+        .form-group1 {
+            margin-bottom: 30px;
         }
         .form-container, .response-container {
             width: 48%;
@@ -27,13 +30,13 @@
                 <div class="form-group">
                     <input type="text" id="idInstance" class="form-control" placeholder="idInstance">
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                     <input type="text" id="apiTokenInstance" class="form-control" placeholder="apiTokenInstance">
                 </div>
                 <div class="form-group">
                     <button onclick="getSettings()" class="btn btn-primary btn-block">Get Settings</button>
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                     <button onclick="getStateInstance()" class="btn btn-primary btn-block">Get State Instance</button>
                 </div>
                 <div class="form-group">
@@ -42,7 +45,7 @@
                 <div class="form-group">
                     <input type="text" id="message" class="form-control" placeholder="Message">
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                     <button onclick="sendMessage()" class="btn btn-primary btn-block">Send Message</button>
                 </div>
                 <div class="form-group">
@@ -73,7 +76,7 @@
         adjustResponseBlockHeight();
 
         window.onresize = adjustResponseBlockHeight;
-        const apiUrl = "https://api.green-api.com";
+
 
 
 
@@ -84,17 +87,17 @@ function getStateInstance() {
 
     var requestUrl = `${apiUrl}/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`;
 
-    // Making a GET request using fetch
+
     fetch(requestUrl)
-        .then(response => response.text()) // Get the response text
+        .then(response => response.text()) 
         .then(text => {
-            // Display the response data in the response block
+
             document.getElementById('responseBlock').value = text;
             console.log(text)
         })
 
         .catch(error => {
-            // Handle any errors
+           
             console.error('Error:', error);
             document.getElementById('responseBlock').value = 'Error: ' + error;
         });
