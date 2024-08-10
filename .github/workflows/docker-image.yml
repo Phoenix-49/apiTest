@@ -18,7 +18,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build . --file Dockerfile --tag tstapiimg:$(date +%s)
+        docker build --file Dockerfile --tag tstapiimg:$(date +%s) .
         
     - name: Stop all running containers
       run: |
