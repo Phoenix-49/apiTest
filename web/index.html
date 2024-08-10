@@ -54,8 +54,8 @@
 
     function getStateInstance() {
         
-        //var idInstance = document.getElementById('idInstance').value;
-        //var apiTokenInstance = document.getElementById('apiTokenInstance').value;
+        var idInstance = document.getElementById('idInstance').value;
+        var apiTokenInstance = document.getElementById('apiTokenInstance').value;
 
         var requestUrl = `${apiUrl}/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`;
 
@@ -82,8 +82,8 @@
 
         function sendMessage() {
             document.getElementById('responseBlock').value = "";
-            //const idInstance = document.getElementById('idInstance').value;
-            //const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+            const idInstance = document.getElementById('idInstance').value;
+            const apiTokenInstance = document.getElementById('apiTokenInstance').value;
             const chatId = document.getElementById('chatId').value;
             const message = document.getElementById('message').value;
 
@@ -112,12 +112,12 @@
 
         function getSettings() {
             document.getElementById('responseBlock').value = "";
-            //var idInstance = document.getElementById('idInstance').value;
-        //var apiTokenInstance = document.getElementById('apiTokenInstance').value;
+            var idInstance = document.getElementById('idInstance').value;
+            var apiTokenInstance = document.getElementById('apiTokenInstance').value;
 
             var requestUrl = `${apiUrl}/waInstance${idInstance}/getSettings/${apiTokenInstance}`;
 
-        // Making a GET request using fetch
+       
             fetch(requestUrl)
             .then(response => response.data)
             .then(data => {
@@ -129,8 +129,8 @@
         }
 
         function sendFileByUrl() {
-           // const idInstance = document.getElementById('idInstance').value;
-           // const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+            const idInstance = document.getElementById('idInstance').value;
+            const apiTokenInstance = document.getElementById('apiTokenInstance').value;
             const chatId = document.getElementById('chatId').value;
             const message = document.getElementById('message').value;
             const urlFile = document.getElementById('urlFile').value;
@@ -161,7 +161,7 @@
             .catch(error => {
                 document.getElementById('responseBlock').value += 'Error: ' + error + '\n';
             });
-            // Implement the sendFileByUrl API method here
+            
         }
     </script>
 </body>
