@@ -147,7 +147,7 @@ function getStateInstance() {
 
    
         fetch(requestUrl)
-        .then(response => response.data)
+        .then(response => response.json())
         .then(data => {
             document.getElementById('responseBlock').value += JSON.stringify(data, null, 2) + '\n';
         })
