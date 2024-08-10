@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Interaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-container, .response-container {
+            width: 45%;
+        }
+        input, button, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <input type="text" id="idInstance" placeholder="idInstance">
+            <input type="text" id="apiTokenInstance" placeholder="apiTokenInstance">
+            <button onclick="getSettings()">Get Settings</button>
+            <button onclick="getStateInstance()">Get State Instance</button>
+            <input type="text" id="chatId" placeholder="chatId">
+            <input type="text" id="message" placeholder="Message">
+            <button onclick="sendMessage()">Send Message</button>
+            <input type="text" id="urlFile" placeholder="URL File">
+            <input type="text" id="fileName" placeholder="File Name">
+            <button onclick="sendFileByUrl()">Send File by URL</button>
+        </div>
+        <div class="response-container">
+            <textarea id="responseBlock" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = "https://api.green-api.com";
+
+
+
+    function getStateInstance() {
+        
+        //var idInstance = document.getElementById('idInstance').value;
+        //var apiTokenInstance = document.getElementById('apiTokenInstance').value;
+
+        var requestUrl = `${apiUrl}/waInstance${idInstance}/getStateInstance/${apiTokenInstance}`;
+
+        // Making a GET request using fetch
+        fetch(requestUrl)
+            .then(response => response.text()) // Get the response text
+            .then(text => {
+                // Display the response data in the response block
+                document.getElementById('responseBlock').value = text;
+                console.log(text)
+            })
+
+            .catch(error => {
+                // Handle any errors
+                console.error('Error:', error);
+                document.getElementById('responseBlock').value = 'Error: ' + error;
+            });
+    };
+
+
+
+
+        
+
+        function sendMessage() {
+            document.getElementById('responseBlock').value = "";
+            //const idInstance = document.getElementById('idInstance').value;
+            //const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+            const chatId = document.getElementById('chatId').value;
+            const message = document.getElementById('message').value;
+
+            const requestUrl = `${apiUrl}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`;
+
+            const data = {
+                chatId: chatId,
+                message: message
+            };
+
+            fetch(requestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseBlock').value += JSON.stringify(data, null, 2) + '\n';
+            })
+            .catch(error => {
+                document.getElementById('responseBlock').value += 'Error: ' + error + '\n';
+            });
+        }
+
+        function getSettings() {
+            document.getElementById('responseBlock').value = "";
+            //var idInstance = document.getElementById('idInstance').value;
+        //var apiTokenInstance = document.getElementById('apiTokenInstance').value;
+
+            var requestUrl = `${apiUrl}/waInstance${idInstance}/getSettings/${apiTokenInstance}`;
+
+        // Making a GET request using fetch
+            fetch(requestUrl)
+            .then(response => response.data)
+            .then(data => {
+                document.getElementById('responseBlock').value += JSON.stringify(data, null, 2) + '\n';
+            })
+            .catch(error => {
+                document.getElementById('responseBlock').value += 'Error: ' + error + '\n';
+            });
+        }
+
+        function sendFileByUrl() {
+           // const idInstance = document.getElementById('idInstance').value;
+           // const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+            const chatId = document.getElementById('chatId').value;
+            const message = document.getElementById('message').value;
+            const urlFile = document.getElementById('urlFile').value;
+            const fileName = document.getElementById('fileName').value;
+
+
+            const requestUrl = `${apiUrl}/waInstance${idInstance}/sendFileByUrl/${apiTokenInstance}`;
+
+            const data = {
+                chatId: chatId,
+                
+                urlFile: urlFile,
+                fileName: fileName,
+            };
+            
+            fetch(requestUrl, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseBlock').value += JSON.stringify(data, null, 2) + '\n';
+            })
+            .catch(error => {
+                document.getElementById('responseBlock').value += 'Error: ' + error + '\n';
+            });
+            // Implement the sendFileByUrl API method here
+        }
+    </script>
+</body>
+</html>
