@@ -15,10 +15,15 @@ jobs:
 
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
+      
+    - name: Set Image Tag
+      id: image-tag
+      run: echo "IMAGE_TAG=my-app:$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+
 
     - name: Build Docker image
       run: |
-        docker build --file Dockerfile --tag tstapiimg:$(date +%s) .
+        docker build --file Dockerfile --tag ${{ env.IMAGE_TAG }} .
         
     - name: Stop all running containers
       run: |
@@ -31,4 +36,4 @@ jobs:
 
     - name: Run Docker container
       run: |
-        docker run -d --name tstAPI -p 80:80 tstapiimg:$(date +%s)
+        docker run -d --name tstAPI -p 80:80 ${{ env.IMAGE_TAG }}
