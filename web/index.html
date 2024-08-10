@@ -81,7 +81,8 @@
 
 
 function getStateInstance() {
-    
+    document.getElementById('responseBlock').value = "";
+
     var idInstance = document.getElementById('idInstance').value;
     var apiTokenInstance = document.getElementById('apiTokenInstance').value;
 
@@ -157,6 +158,8 @@ function getStateInstance() {
     }
 
     function sendFileByUrl() {
+        document.getElementById('responseBlock').value = "";
+
         const idInstance = document.getElementById('idInstance').value;
         const apiTokenInstance = document.getElementById('apiTokenInstance').value;
         const chatId = document.getElementById('chatId').value;
